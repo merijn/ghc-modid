@@ -36,7 +36,7 @@ startServer sockPath opts = withSocket $ \sock -> do
             forever $ bracket (fst <$> accept sock) close $
                 handleRequest stdIn stdOut stdErr
   where
-    runDaemon :: IO () -> IO ()
+    runDaemon :: IO () -> IO () -> IO ()
     runDaemon act = (`onException` act) . daemonise . (`finally` act)
 
     ghcModI :: CreateProcess
