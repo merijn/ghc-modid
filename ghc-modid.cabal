@@ -16,13 +16,15 @@ Cabal-Version:       >= 1.10
 Build-Type:          Simple
 Tested-With:         GHC == 8.0
 
-Synopsis:            
+Synopsis:            Daemonising wrapper for ghc-mod
 
 Description:
+    Daemonising wrapper for ghc-mod that functions as drop-in replacement for
+    ghc-mod, using a long-running ghc-modi session.
 
 Executable ghc-modid
   Default-Language:     Haskell2010
-  GHC-Options:          -O -Wall -fno-warn-unused-do-bind -rtsopts
+  GHC-Options:          -Wall -fno-warn-unused-do-bind -rtsopts
   GHC-Prof-Options:     -fprof-auto
   Main-Is:              Main.hs
 
