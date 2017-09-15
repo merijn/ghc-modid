@@ -19,7 +19,7 @@ import System.Directory (removeFile)
 import System.Environment (getArgs)
 import System.Exit (ExitCode(ExitSuccess))
 import System.FilePath ((</>))
-import System.IO (BufferMode(..), Handle, hSetBuffering)
+import System.IO (BufferMode(..), Handle, hPutStrLn, hSetBuffering)
 import System.IO.Error (isDoesNotExistError)
 import qualified System.Posix.Env.ByteString as BS
 import System.Posix.Process (createSession, exitImmediately, forkProcess)
@@ -47,7 +47,7 @@ startServer sockPath opts = withSocket serverLoop
                 hSetBuffering stdIn LineBuffering
                 let startState = Daemon { numClients = 0, maxTimeout = 1e6 }
                 acceptLoop (handleRequest stdIn stdOut stdErr) startState
-                BS.hPutStrLn stdIn "quit"
+                hPutStrLn stdIn "quit"
       where
         runDaemon :: IO () -> IO () -> IO ()
         runDaemon act = (`onException` act) . daemonise . (`finally` act)
